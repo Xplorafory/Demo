@@ -1,5 +1,5 @@
 pipeline {
-    agent any 
+    agent {node { label 'remote2' } }
     tools {
       maven 'M3'
     }
@@ -36,6 +36,9 @@ pipeline {
         }
         failure {
             echo 'This will fun only if failed'
+       /*     mail to: 'jonas.breisel@xploraforytest.se',
+                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                body: "Something is wrong with ${env.BUILD_URL}"*/
         }
         unstable {
             echo 'This will run only if the run was unstable'
