@@ -1,5 +1,5 @@
 pipeline {
-    agent {node { label 'remote2' } }
+    agent
     tools {
       maven 'M3'
     }
