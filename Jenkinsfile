@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent {label 'remote2'}
     tools {
       maven 'M3'
     }
@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage("build") {
             steps {
-                echo 'building the application...'
+
                 sh "mvn -B clean"
             }
         }
@@ -35,7 +35,7 @@ pipeline {
             echo 'This will run only if successful'
         }
         failure {
-            echo 'This will fun only if failed'
+            echo 'This will run only if failed'
        /*     mail to: 'jonas.breisel@xploraforytest.se',
                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                 body: "Something is wrong with ${env.BUILD_URL}"*/
