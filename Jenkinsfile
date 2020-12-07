@@ -1,7 +1,12 @@
 pipeline {
-    agent {label 'remote2'}
+    
+    agent {
+        node { label 'remote2' }
+    }
+
     tools {
       maven 'M3'
+      
     }
 
     stages {
