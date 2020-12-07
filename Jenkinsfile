@@ -6,20 +6,15 @@ pipeline {
       maven 'M3'
       
     }
+    options { timestamps () }
 
     stages {
-        timestamps {
-            ansiColor("xterm") {
-                timeout(time: 1, unit: "SECONDS") {
-                    stage("build") {
-                        steps {
+        stage("build") {
+            steps {
 
-                            sh "mvn -Dmaven.test.failure.ignore=true clean compile"
-                        }
-                    }
+                sh "mvn -Dmaven.test.failure.ignore=true clean compile"
                 }
             }
-        }
 
         stage("test") {
             steps {
