@@ -8,10 +8,14 @@ pipeline {
     }
 
     stages {
-        stage("build") {
-            steps {
+        ansiColor("xterm") {
+            timeout(time: 1, unit: "SECONDS") {
+                stage("build") {
+                    steps {
 
-                sh "mvn -Dmaven.test.failure.ignore=true clean compile"
+                        sh "mvn -Dmaven.test.failure.ignore=true clean compile"
+                    }
+                }
             }
         }
 
