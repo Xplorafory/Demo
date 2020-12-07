@@ -6,7 +6,9 @@ pipeline {
       maven 'M3'
       
     }
-    options { timestamps (), triggers{ cron('H/5 * * * *') } }
+    options { timestamps () }
+
+    triggers{ cron('H/5 * * * *') } 
 
     stages {
         stage("build") {
