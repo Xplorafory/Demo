@@ -10,25 +10,27 @@ pipeline {
 
     //triggers{ cron('H/5 * * * *') }
 
-    stages {
-        stage("build") {
-            steps {
+    node {
+        stages {
+            stage("build") {
+                steps {
 
-                bat "mvn -Dmaven.test.failure.ignore=true clean compile"
+                    bat "mvn -Dmaven.test.failure.ignore=true clean compile"
                 }
             }
 
-        stage("test") {
-            steps {
-                echo 'testing the application...'
-                bat "mvn -Dmaven.test.failure.ignore=true clean test"
+            stage("test") {
+                steps {
+                    echo 'testing the application...'
+                    bat "mvn -Dmaven.test.failure.ignore=true test"
+                }
             }
-        }
-        
-        stage("deploy") {
-            steps{
-                echo 'deploying the application...'
-                bat "mvn -Dmaven.test.failure.ignore=true clean install"
+
+            stage("deploy") {
+                steps {
+                    echo 'deploying the application...'
+                    bat "mvn -Dmaven.test.failure.ignore=true install"
+                }
             }
         }
     }
