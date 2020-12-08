@@ -1,39 +1,38 @@
 pipeline {
-    
+
     agent {label 'remote2'}
 
     tools {
-      maven 'M3'
-      
+        maven 'M3'
+
     }
     options { timestamps () }
 
     //triggers{ cron('H/5 * * * *') }
 
-    node {
-        stages {
-            stage("build") {
-                steps {
+    stages {
+        stage("build") {
+            steps {
 
-                    bat "mvn -Dmaven.test.failure.ignore=true clean compile"
-                }
+                bat "mvn -Dmaven.test.failure.ignore=true clean compile"
             }
+        }
 
-            stage("test") {
-                steps {
-                    echo 'testing the application...'
-                    bat "mvn -Dmaven.test.failure.ignore=true test"
-                }
+        stage("test") {
+            steps {
+                echo 'testing the application...'
+                bat "mvn -Dmaven.test.failure.ignore=true test"
             }
+        }
 
-            stage("deploy") {
-                steps {
-                    echo 'deploying the application...'
-                    bat "mvn -Dmaven.test.failure.ignore=true install"
-                }
+        stage("deploy") {
+            steps {
+                echo 'deploying the application...'
+                bat "mvn -Dmaven.test.failure.ignore=true install"
             }
         }
     }
+    
     post {
         always {
             echo 'This will always run'
@@ -45,9 +44,9 @@ pipeline {
         }
         failure {
             echo 'This will run only if failed'
-       /*     mail to: 'jonas.breisel@xploraforytest.se',
-                subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                body: "Something is wrong with ${env.BUILD_URL}"*/
+            /*     mail to: 'jonas.breisel@xploraforytest.se',
+                     subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                     body: "Something is wrong with ${env.BUILD_URL}"*/
         }
         unstable {
             echo 'This will run only if the run was unstable'
