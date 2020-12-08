@@ -14,21 +14,21 @@ pipeline {
         stage("build") {
             steps {
 
-                sh "mvn -Dmaven.test.failure.ignore=true clean compile"
+                bat "mvn -Dmaven.test.failure.ignore=true clean compile"
                 }
             }
 
         stage("test") {
             steps {
                 echo 'testing the application...'
-                sh "mvn -Dmaven.test.failure.ignore=true clean test"
+                bat "mvn -Dmaven.test.failure.ignore=true clean test"
             }
         }
         
         stage("deploy") {
             steps{
                 echo 'deploying the application...'
-                sh "mvn -Dmaven.test.failure.ignore=true clean install"
+                bat "mvn -Dmaven.test.failure.ignore=true clean install"
             }
         }
     }
