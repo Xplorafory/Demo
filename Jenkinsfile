@@ -1,6 +1,6 @@
 pipeline {
     
-    agent any
+    agent {label 'remote2'}
 
     tools {
       maven 'M3'
